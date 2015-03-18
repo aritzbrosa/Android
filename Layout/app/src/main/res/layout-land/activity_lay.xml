@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Alfa"
+        android:id="@+id/buttona"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/space" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Beta"
+        android:id="@+id/buttonb"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/space" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/space" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Omega"
+        android:id="@+id/buttonz"
+        android:layout_below="@+id/buttona"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Phi"
+        android:id="@+id/buttonf"
+        android:layout_below="@+id/buttonz"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/buttona" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Ro"
+        android:id="@+id/buttonr"
+        android:layout_below="@+id/buttonz"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/buttonb" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Sigma"
+        android:id="@+id/buttons"
+        android:layout_below="@+id/buttonf"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/buttonr"
+        android:layout_alignEnd="@+id/buttonf" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Theta"
+        android:id="@+id/buttont"
+        android:layout_above="@+id/space"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttons"
+        android:layout_toStartOf="@+id/space" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Lambda"
+        android:id="@+id/buttonl"
+        android:layout_above="@+id/space"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/space" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button Epsilon"
+        android:id="@+id/buttone"
+        android:layout_above="@+id/buttonl"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/buttonr"
+        android:layout_alignStart="@+id/buttonl" />
+
+</RelativeLayout>
