@@ -41,6 +41,7 @@ public class TodoActivity extends ActionBarActivity {
     }
 
     private void addEventListeners(){
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

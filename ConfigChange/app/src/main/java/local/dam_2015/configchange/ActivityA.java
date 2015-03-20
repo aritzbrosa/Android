@@ -24,13 +24,13 @@ public class ActivityA extends ActionBarActivity {
 
         Log.d("CHANGE","ActivityA onCreate()");
 
-        if(){
-            String data savedInstanceState.get(DATA);
+        if(savedInstanceState != null){
+            String data = savedInstanceState.getString(DATA);
             Log.d("CHANGE","ActivityA onCreate() saved data");
         }
 
         Button buttonOpenB = (Button) findViewById(R.id.buttonOpenB);
-        Button buttonCloseA = (Button) findViewById(R.id.buttonCloseA);
+        Button buttonCloseA = (Button) findViewById(R.id.buttonClose);
 
         buttonOpenB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class ActivityA extends ActionBarActivity {
         });
     }
 
-    private void restoreState(Bundle ){
+    private void restoreState(Bundle s){
 
     }
 
@@ -62,7 +62,6 @@ public class ActivityA extends ActionBarActivity {
         Log.d("CHANGE","ActivityA onSaveInstanceState");
 
         outState.putString(DATA, "datos");
-        outState.
 
         super.onSaveInstanceState(outState);
     }

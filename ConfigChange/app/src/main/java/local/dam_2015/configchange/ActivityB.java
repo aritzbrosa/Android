@@ -18,7 +18,7 @@ public class ActivityB extends ActionBarActivity {
         setContentView(R.layout.activity_activity_b);
 
         Button buttonOpenA = (Button) findViewById(R.id.buttonOpenB);
-        Button buttonCloseB = (Button) findViewById(R.id.buttonCloseA);
+        Button buttonCloseB = (Button) findViewById(R.id.buttonClose);
 
         Log.d("CHANGE","ActivityB onCreate()");
 
@@ -27,7 +27,7 @@ public class ActivityB extends ActionBarActivity {
             public void onClick(View v) {
                 Log.d("CHANGE","ActivityB onClick()");
 
-                Intent openA = new Intent(ActivityA.this, ActivityB.class);
+                Intent openA = new Intent(ActivityB.this, ActivityA.class);
                 startActivity(openA);
 
             }
