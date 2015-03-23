@@ -7,14 +7,14 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="local.dam_2015.frag_todo.InputFragment"
+        android:name="local.dam_2015.frag_todo.fragments.InputFragment"
         android:id="@+id/fragment"
         tools:layout="@layout/fragment_input" />
 
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:name="android.app.ListFragment"
+        android:name="local.dam_2015.frag_todo.fragments.TodoListFragment"
         android:id="@+id/fragment2"
         android:layout_weight="1"
         tools:layout="@layout/fragment_input" />

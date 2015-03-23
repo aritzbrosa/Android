@@ -2,11 +2,14 @@ package local.dam_2015.frag_todo;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import local.dam_2015.frag_todo.fragments.InputFragment;
+import local.dam_2015.frag_todo.model.todo;
 
 
-public class FragActivity extends ActionBarActivity {
+public class FragActivity extends ActionBarActivity implements InputFragment.setItemListener{
+
+    String TODO = "todo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,26 +17,16 @@ public class FragActivity extends ActionBarActivity {
         setContentView(R.layout.activity_frag);
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.frag, menu);
-        return true;
-    }
+    public void addTodo(todo todo) {
+        //Log.d(TODO);
+        InputFragment.setItemListener listFragment;
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        try{
+            listFragment = (InputFragment.setItemListener) getFragmentManager().findFragmentById(R.id.fragment2);
+        } catch(ClassCastException ex) {
+            throw new ClassCastException(this.toString() + "must implement setItemListener()");
         }
-
-        return super.onOptionsItemSelected(item);
+        listFragment.addTodo(todo);
     }
 }
