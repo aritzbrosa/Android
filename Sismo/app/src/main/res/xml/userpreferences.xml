@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/earthquakes_refresh">
+        <SwitchPreference
+            android:key="@string/PREF_AUTO_UPDATE"
+            android:title="@string/autoupdate_prompt"
+            android:summary="@string/auto_update_desc"
+            android:defaultValue="true"></SwitchPreference>
+        <CheckBoxPreference
+            android:key="@string/AUTOREFRESH_CB"
+            android:title="Autorefresh"
+            android:summary="Autorefresh earthquakes"
+            android:defaultValue="true">
+        </CheckBoxPreference>
+        <ListPreference
+            android:defaultValue="0"
+            android:key="@string/PREF_UPDATE_INTERNAL"
+            android:title=""
+            android:summary=""
+            android:entries="@array/magnitude"
+            android:entryValues="@array/update_from_entry_values"
+            android:dependency="@string/AUTOREFRESH_CB"
+            android:></ListPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/magnitude"
         android:text="4.2"
-        android:textSize="@dimen/abc_text_size_display_3_material"
+        android:textSize="@dimen/abc_text_size_display_2_material"
         android:background="#99424242" />
 
     <RelativeLayout
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/date"
-            android:textSize="@dimen/abc_text_size_display_1_material"
+            android:textSize="@dimen/abc_text_size_headline_material"
             android:text="2/22/2015"
             android:paddingLeft="50dp"
             android:layout_marginLeft="0dp"

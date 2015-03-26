@@ -30,6 +30,7 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
 
     public interface addEQInterface{
         public void addEQ(EarthQ earthquake);
+        public void notifyTotal(int total);
     }
 
     public  DownloadEQTasks(addEQInterface target){
@@ -38,13 +39,23 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
 
     @Override
     protected Integer doInBackground(String... urls) {
+        int count = 0;
+
         if(urls.length > 0){
-            updateEarthQs(urls[0]);
+           count = updateEarthQs(urls[0]);
         }
-        return null;
+        return count;
     }
 
-    private void updateEarthQs(String eqFeed) {
+    @Override
+    protected void onPostExecute(Integer count) {
+        super.onPostExecute(count);
+
+        target.notifyTotal(count.intValue());
+    }
+
+    private int updateEarthQs(String eqFeed) {
+        int count=0;
 
         JSONObject json;
         try{
@@ -66,7 +77,7 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
 
                 json = new JSONObject(responseStrBuilder.toString());
                 JSONArray earthquakes = json.getJSONArray("features");
-
+                count = earthquakes.length();
                 for (int i = earthquakes.length()-1; i >= 0; i--) {
                     processEarthQuakeTask(earthquakes.getJSONObject(i));
                 }
@@ -81,6 +92,7 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return count;
     }
 
     @Override

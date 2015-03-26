@@ -3,5 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="eq_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson</string>
+    <string name="eq_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson</string>
+    <string name="num_eq">%d earthquakes processed</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="little_activity_settings">preferences</string>
 </resources>
