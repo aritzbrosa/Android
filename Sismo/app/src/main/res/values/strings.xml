@@ -7,4 +7,20 @@
     <string name="num_eq">%d earthquakes processed</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="little_activity_settings">preferences</string>
+    <string name="PREF_SWITCH">key_switch</string>
+    <string name="autoupdate_prompt">Update</string>
+    <string name="auto_update_desc">Update earthquakes</string>
+    <string name="PREF_UPDATE_INTERNAL">key_autoupdate</string>
+    <string name="title_prefence_mag">Filtro</string>
+    <string name="earthquakes_refresh">Actualizacion</string>
+    <string name="title_refresh">Frequency updating</string>
+    <string name="sum_refresh">Define la frecuencia de actualizacion de terremotos</string>
+    <string name="title_magnitude">Magnitud de Terremoto</string>
+    <string name="sum_magnitude">Muestra la magnitud del terremoto</string>
+    <string name="title_dialog_mag">Select minimal magnitude</string>
+    <string name="title_dialog_refresh">Select refresh frequency</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="PREF_MAGNITUDE">key_magnitude</string>
 </resources>

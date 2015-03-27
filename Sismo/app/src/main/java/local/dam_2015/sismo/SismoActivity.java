@@ -6,15 +6,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import local.dam_2015.sismo.Tasks.DownloadEQTasks;
 
-public class SismoActivity extends ActionBarActivity {
 
-    private static final int PREFS_ACTIVITY = 1 ;
+public class SismoActivity extends ActionBarActivity implements DownloadEQTasks.addEQInterface{
+
+    public static final int PREFS_ACTIVITY = 1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sismo);
+
+        downloadEQs();
+    }
+
+    private void downloadEQs() {
+        DownloadEQTasks task = new DownloadEQTasks(this,this);
+        task.execute(getString(R.string.eq_url));
     }
 
 
@@ -46,5 +55,10 @@ public class SismoActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void notifyTotal(int total) {
+
     }
 }

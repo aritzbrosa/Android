@@ -1,5 +1,6 @@
 package local.dam_2015.sismo.Tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import local.dam_2015.sismo.R;
+import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.EarthQListFragment;
 import local.dam_2015.sismo.model.Coord;
 import local.dam_2015.sismo.model.EarthQ;
@@ -27,14 +29,17 @@ import local.dam_2015.sismo.model.EarthQ;
 public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
 
     private addEQInterface target;
+    private EarthQuakeDB earthquakeDB;
 
     public interface addEQInterface{
-        public void addEQ(EarthQ earthquake);
         public void notifyTotal(int total);
     }
 
-    public  DownloadEQTasks(addEQInterface target){
+    public  DownloadEQTasks(Context context, addEQInterface target)
+    {
         this.target = target;
+
+        earthquakeDB = new EarthQuakeDB(context);
     }
 
     @Override
@@ -99,7 +104,7 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
     protected void onProgressUpdate(EarthQ... EQ) {
         super.onProgressUpdate(EQ);
 
-        target.addEQ(EQ[0]);
+        //target.addEQ(EQ[0]);
     }
 
     private void processEarthQuakeTask(JSONObject jsonObject) {

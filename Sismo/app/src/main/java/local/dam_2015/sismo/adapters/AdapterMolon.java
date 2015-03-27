@@ -1,6 +1,5 @@
 package local.dam_2015.sismo.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import local.dam_2015.sismo.R;
@@ -69,47 +67,36 @@ public class AdapterMolon extends ArrayAdapter<EarthQ> {
 
     private void setMagColor(EarthQ item, LinearLayout layout){
         Color color;
-        int r,g=125,b=125;
+        int r=47483647,g=125,b=125;
 
         NumberFormat formatter = new DecimalFormat("#0");
+        String num = formatter.format(item.getMagnitude());
         TextView mag = (TextView) layout.findViewById(R.id.magnitude);
 
-        switch(formatter.format(item.getMagnitude())){
-            case "0":
-                 r=25;
-                break;
-            case "1":
-                 r=50;
-                break;
-            case "2":
-                 r=75;
-                break;
-            case "3":
-                 r=100;
-                break;
-            case "4":
-                 r=125;
-                break;
-            case "5":
-                 r=150;
-                break;
-            case "6":
-                 r=175;
-                break;
-            case "7":
-                 r=200;
-                break;
-            case "8":
-                 r=225;
-                break;
-            case "9":
-                 r=255;
-                break;
-            default:
-                 r=0;
-                break;
+        if(num=="1"){
+            r=50;
+        }else if(num=="2"){
+            r=83647;
+        }else if(num=="3"){
+            r=-2147483648;
+        }else if(num=="4"){
+            r=125;
+        }else if(num=="5"){
+            r=150;
+        }else if(num=="6"){
+            r=175;
+        }else if(num=="7"){
+            r=200;
+        }else if(num=="8"){
+            r=225;
+        }else if(num=="9"){
+            r=255;
+        }else if(num=="0"){
+            r=2147483647;
         }
-        color = new Color(r,g,b);
-        mag.setBackgroundColor(color);
+
+        color = new Color();
+        //color.getColor
+        mag.setBackgroundColor(r);
     }
 }

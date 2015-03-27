@@ -2,8 +2,10 @@ package local.dam_2015.sismo.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +49,7 @@ public class EarthQListFragment extends ListFragment implements DownloadEQTasks.
     private ArrayList<EarthQ> ListaTerremotos;
     public static final String EARTHQUAKE = "EARTHQUAKE";
     private ArrayAdapter<EarthQ> aa;
+    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,7 @@ public class EarthQListFragment extends ListFragment implements DownloadEQTasks.
 
         ListaTerremotos = new ArrayList<>();
 
-        DownloadEQTasks task = new DownloadEQTasks(this);
-        task.execute(getString(R.string.eq_url));
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
     }
 
@@ -69,12 +71,6 @@ public class EarthQListFragment extends ListFragment implements DownloadEQTasks.
         return layout;
     }
 
-
-    @Override
-    public void addEQ(EarthQ earthquake) {
-        ListaTerremotos.add(0,earthquake);
-        aa.notifyDataSetChanged();
-    }
 
     @Override
     public void notifyTotal(int total) {

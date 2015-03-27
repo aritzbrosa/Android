@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/earthquakes_refresh">
+        <!-- Autorefresh Si/No-->
         <SwitchPreference
-            android:key="@string/PREF_AUTO_UPDATE"
+            android:key="@string/PREF_SWITCH"
             android:title="@string/autoupdate_prompt"
             android:summary="@string/auto_update_desc"
             android:defaultValue="true"></SwitchPreference>
-        <CheckBoxPreference
-            android:key="@string/AUTOREFRESH_CB"
-            android:title="Autorefresh"
-            android:summary="Autorefresh earthquakes"
-            android:defaultValue="true">
-        </CheckBoxPreference>
+        <!-- Frecuancia de refresco -->
         <ListPreference
             android:defaultValue="0"
             android:key="@string/PREF_UPDATE_INTERNAL"
-            android:title=""
-            android:summary=""
-            android:entries="@array/magnitude"
-            android:entryValues="@array/update_from_entry_values"
-            android:dependency="@string/AUTOREFRESH_CB"
-            android:></ListPreference>
+            android:title="@string/title_refresh"
+            android:summary="@string/sum_refresh"
+            android:entries="@array/update_freq_entries"
+            android:entryValues="@array/update_freq_values"
+            android:dependency="@string/PREF_SWITCH"
+            android:dialogTitle="@string/title_dialog_refresh"></ListPreference>
+
+
     </PreferenceCategory>
-
+    <!-- Magnitud Minima -->
     <PreferenceCategory
-        android:>
-
+        android:title="@string/title_prefence_mag">
+        <ListPreference
+            android:defaultValue="0"
+            android:key="@string/PREF_MAGNITUDE"
+            android:title="@string/title_magnitude"
+            android:summary="@string/sum_magnitude"
+            android:entries="@array/min_mag_entries"
+            android:entryValues="@array/min_mag_values"
+            android:dependency="@string/PREF_SWITCH"
+            android:dialogTitle="@string/title_dialog_mag"></ListPreference>
     </PreferenceCategory>
 
 </PreferenceScreen>
