@@ -3,6 +3,7 @@ package local.dam_2015.sismo.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.preference.PreferenceManager;
@@ -27,38 +28,46 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 import local.dam_2015.sismo.DetailActivity;
 import local.dam_2015.sismo.R;
 
 import local.dam_2015.sismo.Tasks.DownloadEQTasks;
 import local.dam_2015.sismo.adapters.AdapterMolon;
+import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.dummy.DummyContent;
 import local.dam_2015.sismo.model.Coord;
 import local.dam_2015.sismo.model.EarthQ;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
- * interface.
- */
+
 public class EarthQListFragment extends ListFragment implements DownloadEQTasks.addEQInterface {
 
-    private ArrayList<EarthQ> ListaTerremotos;
+    private List<EarthQ> ListaTerremotos;
     public static final String EARTHQUAKE = "EARTHQUAKE";
     private ArrayAdapter<EarthQ> aa;
     private SharedPreferences prefs;
+    private EarthQuakeDB db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ListaTerremotos = new ArrayList<>();
+        db = new EarthQuakeDB(getActivity());
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ListaTerremotos.clear();
+        ListaTerremotos.addAll(db.getAllByMagnitude(Integer.parseInt(prefs.getString(getString(R.string.PREF_MAGNITUDE), "0"))));
+
+        aa.notifyDataSetChanged();
     }
 
     @Override
@@ -76,7 +85,7 @@ public class EarthQListFragment extends ListFragment implements DownloadEQTasks.
     public void notifyTotal(int total) {
         String msg = getString(R.string.num_eq, total);
 
-        Toast t = Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT);
+        Toast t = Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT);
         t.show();
     }
 

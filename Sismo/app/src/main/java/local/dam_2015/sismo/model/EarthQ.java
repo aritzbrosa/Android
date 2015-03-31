@@ -82,4 +82,20 @@ public class EarthQ {
 
         this.date=new Date(time);
     }
+
+    public boolean isValid() {
+        boolean reply = true;
+
+        if(this.coordinate.getLgtd()>180 || this.coordinate.getLgtd()<-180){
+            reply=false;
+        }
+        if(this.coordinate.getLttd()>85 || this.coordinate.getLttd()<-85.05115){
+            reply=false;
+        }
+        if(this.magnitude<0){
+            reply=false;
+        }
+
+        return reply;
+    }
 }

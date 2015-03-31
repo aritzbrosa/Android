@@ -41,17 +41,17 @@ public class SettingsFragment extends PreferenceFragment
         //TODO: Checa las preferencias compartidas y sus claves
         //y cambia la interfaz de usuario o comportamiento adecuadamente.
 
-        String newValue = "No cambios";
+        //String newValue = "No cambios";
 
         Log.d("EARTHQUAKE", "PrEfErEnces: " + sharedPreferences + "Y el Key: " + key);
 
-        if(key.equals(getString(R.string.PREF_UPDATE_INTERNAL))){
+        /*if(key.equals(getString(R.string.PREF_UPDATE_INTERNAL))){
             // Start/Stop auto refresh
         }else if(key.equals(getString(R.string.PREF_SWITCH))){
             // Change auto refresh interval
         }else if(key.equals(getString(R.string.PREF_MAGNITUDE))){
             // Update earthquake listView
             double minMag = Double.parseDouble(sharedPreferences.getString(key, "0"));
-        }
+        }*/
     }
 }

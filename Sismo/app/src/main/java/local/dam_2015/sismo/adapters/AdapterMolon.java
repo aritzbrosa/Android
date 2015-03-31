@@ -56,9 +56,10 @@ public class AdapterMolon extends ArrayAdapter<EarthQ> {
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd");
 
         NumberFormat formatter = new DecimalFormat("#0.0");
-        setMagColor(item, layout);
+        //setMagColor(item, layout);
         mag.setText(String.valueOf(formatter.format(item.getMagnitude())));
         String a = item.getPlace().substring(item.getPlace().indexOf(",") + 2);
+        //String a = item.getPlace();
         location.setText(a);
         time.setText(sdt.format(item.getDate()));
 

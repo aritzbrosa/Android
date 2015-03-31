@@ -1,13 +1,18 @@
 package local.dam_2015.sismo;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+
+import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.EarthQListFragment;
+import local.dam_2015.sismo.model.EarthQ;
 
 
 public class DetailActivity extends ActionBarActivity {
@@ -15,22 +20,38 @@ public class DetailActivity extends ActionBarActivity {
     private TextView lblloc;
     private TextView lbllat;
     private TextView lbllong;
+    private TextView lblmag;
+    private TextView lbldate;
+    private TextView lblplace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EarthQ eq;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        EarthQuakeDB db = new EarthQuakeDB(this);
+
+        SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
         Intent detailIntent = getIntent();
 
         lblloc = (TextView) findViewById(R.id.loc);
         lbllat = (TextView) findViewById(R.id.lat);
         lbllong = (TextView) findViewById(R.id.longit);
+        lblmag = (TextView) findViewById(R.id.mag);
+        lbldate = (TextView) findViewById(R.id.date);
+        lblplace = (TextView) findViewById(R.id.place);
 
-        String a = detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE);
-        lblloc.setText(detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE));
-        lbllat.setText(detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE));
-        lbllong.setText(detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE));
+        String id = detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE);
+        eq = db.selectIdQuery(id);
+
+        lblloc.setText(String.valueOf(eq.getCoordinate().getLgtd()));
+        lbllat.setText(String.valueOf(eq.getCoordinate().getLttd()));
+        lbllong.setText(String.valueOf(eq.getCoordinate().getDepth()));
+        lblmag.setText(String.valueOf(eq.getMagnitude()));
+        lbldate.setText(sdt.format(eq.getDate()));
+        lblplace.setText(eq.getPlace());
     }
 
 

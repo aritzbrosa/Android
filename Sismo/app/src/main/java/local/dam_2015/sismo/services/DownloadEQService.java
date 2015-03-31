@@ -1,7 +1,11 @@
-package local.dam_2015.sismo.Tasks;
+package local.dam_2015.sismo.services;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.os.IBinder;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -23,40 +27,19 @@ import local.dam_2015.sismo.fragments.EarthQListFragment;
 import local.dam_2015.sismo.model.Coord;
 import local.dam_2015.sismo.model.EarthQ;
 
-/**
- * Created by cursomovil on 25/03/15.
- */
-public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
+public class DownloadEQService extends Service {
+    private EarthQuakeDB earthQDB;
 
-    private addEQInterface target;
-    private EarthQuakeDB earthquakeDB;
-
-    public interface addEQInterface{
-        public void notifyTotal(int total);
-    }
-
-    public  DownloadEQTasks(Context context, addEQInterface target)
-    {
-        this.target = target;
-
-        earthquakeDB = new EarthQuakeDB(context);
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     @Override
-    protected Integer doInBackground(String... urls) {
-        int count = 0;
+    public void onCreate() {
+        super.onCreate();
 
-        if(urls.length > 0){
-           count = updateEarthQs(urls[0]);
-        }
-        return count;
-    }
-
-    @Override
-    protected void onPostExecute(Integer count) {
-        super.onPostExecute(count);
-
-        target.notifyTotal(count.intValue());
+        earthQDB = new EarthQuakeDB(this);
     }
 
     private int updateEarthQs(String eqFeed) {
@@ -100,13 +83,6 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
         return count;
     }
 
-    @Override
-    protected void onProgressUpdate(EarthQ... EQ) {
-        super.onProgressUpdate(EQ);
-
-        //target.addEQ(EQ[0]);
-    }
-
     private void processEarthQuakeTask(JSONObject jsonObject) {
         try {
             String id = jsonObject.getString("id");
@@ -125,7 +101,7 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
             EQ.setURL(properties.getString("url"));
             EQ.setCoordinate(coords);
 
-            earthquakeDB.insertEarthQuake(EQ);
+            earthQDB.insertEarthQuake(EQ);
 
             Log.d(EarthQListFragment.EARTHQUAKE, EQ.toString());
 
@@ -136,4 +112,36 @@ public class DownloadEQTasks extends AsyncTask<String,EarthQ, Integer> {
         }
 
     }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
+
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                updateEarthQs(getString(R.string.eq_url));
+            }
+        });
+
+        t.start();
+
+        return Service.START_STICKY;
+    }
+
+    public void setAlarm() {
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        int alarmType = AlarmManager.ELAPSED_REALTIME_WAKEUP;
+
+        long LengthOfWait = 5000;
+
+        String ALARM_ACTION = "ALARM_ACTION";
+        Intent intentToFire = new Intent(ALARM_ACTION);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, intentToFire, 0);
+
+        alarm.setRepeating(alarmType, LengthOfWait, LengthOfWait, alarmIntent);
+    }
+
+
 }

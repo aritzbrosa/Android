@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import local.dam_2015.sismo.Tasks.DownloadEQTasks;
+import local.dam_2015.sismo.services.DownloadEQService;
 
 
 public class SismoActivity extends ActionBarActivity implements DownloadEQTasks.addEQInterface{
@@ -17,13 +18,17 @@ public class SismoActivity extends ActionBarActivity implements DownloadEQTasks.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sismo);
-
+        DownloadEQService service = new DownloadEQService();
+        service.setAlarm();
         downloadEQs();
     }
 
     private void downloadEQs() {
-        DownloadEQTasks task = new DownloadEQTasks(this,this);
-        task.execute(getString(R.string.eq_url));
+        //DownloadEQTasks task = new DownloadEQTasks(this,this);
+        //task.execute(getString(R.string.eq_url));
+
+        Intent download = new Intent(this, DownloadEQService.class);
+        startService(download);
     }
 
 

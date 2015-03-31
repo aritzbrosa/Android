@@ -12,19 +12,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Location:"
-            android:id="@+id/location"
-            android:layout_weight="1"
+            android:text="Magnitude: "
+            android:id="@+id/textView"
             android:textSize="@dimen/abc_text_size_headline_material" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/loc"
-            android:layout_weight="7" />
+            android:id="@+id/mag"
+            android:textSize="@dimen/abc_text_size_medium_material" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place: "
+            android:id="@+id/textView3"
+            android:textSize="@dimen/abc_text_size_headline_material" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/place"
+            android:textSize="@dimen/abc_text_size_medium_material" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,7 +61,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/lat"
-            android:layout_weight="5" />
+            android:layout_weight="5"
+            android:textSize="@dimen/abc_text_size_medium_material" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +84,51 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/longit"
-            android:layout_weight="5" />
+            android:layout_weight="5"
+            android:textSize="@dimen/abc_text_size_medium_material" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Depth:"
+            android:id="@+id/location"
+            android:layout_weight="1"
+            android:textSize="@dimen/abc_text_size_headline_material" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/loc"
+            android:layout_weight="7"
+            android:textSize="@dimen/abc_text_size_medium_material" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: "
+            android:id="@+id/textView4"
+            android:textSize="@dimen/abc_text_size_headline_material" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:textSize="@dimen/abc_text_size_medium_material" />
     </LinearLayout>
 
     <Button
@@ -77,4 +137,5 @@
         android:text="Back"
         android:id="@+id/back"
         android:layout_gravity="center_horizontal" />
+
 </LinearLayout>
