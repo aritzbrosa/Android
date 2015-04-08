@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -17,12 +19,15 @@ import local.dam_2015.sismo.model.EarthQ;
 
 public class DetailActivity extends ActionBarActivity {
 
+    public static final String MAP = "MAP" ;
     private TextView lblloc;
     private TextView lbllat;
     private TextView lbllong;
     private TextView lblmag;
     private TextView lbldate;
     private TextView lblplace;
+    private Button btnMap;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,9 @@ public class DetailActivity extends ActionBarActivity {
         lblmag = (TextView) findViewById(R.id.mag);
         lbldate = (TextView) findViewById(R.id.date);
         lblplace = (TextView) findViewById(R.id.place);
+        btnMap = (Button) findViewById(R.id.map);
 
-        String id = detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE);
+        id = detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE);
         eq = db.selectIdQuery(id);
 
         lblloc.setText(String.valueOf(eq.getCoordinate().getLgtd()));
@@ -52,6 +58,19 @@ public class DetailActivity extends ActionBarActivity {
         lblmag.setText(String.valueOf(eq.getMagnitude()));
         lbldate.setText(sdt.format(eq.getDate()));
         lblplace.setText(eq.getPlace());
+
+        addEventListener();
+    }
+
+    private void addEventListener() {
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(DetailActivity.this, MapsActivity.class);
+                mapIntent.putExtra("id", id);
+                startActivity(mapIntent);
+            }
+        });
     }
 
 

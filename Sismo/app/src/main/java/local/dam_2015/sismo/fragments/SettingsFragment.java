@@ -1,6 +1,10 @@
 package local.dam_2015.sismo.fragments;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import local.dam_2015.sismo.R;
+import local.dam_2015.sismo.SismoActivity;
+import local.dam_2015.sismo.services.DownloadEQService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,35 +29,13 @@ import local.dam_2015.sismo.R;
  * create an instance of this fragment.
  */
 public class SettingsFragment extends PreferenceFragment
-        implements SharedPreferences.OnSharedPreferenceChangeListener {
+{
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        prefs.registerOnSharedPreferenceChangeListener(this);
-
         addPreferencesFromResource(R.xml.userpreferences);
     }
 
-
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        //TODO: Checa las preferencias compartidas y sus claves
-        //y cambia la interfaz de usuario o comportamiento adecuadamente.
-
-        //String newValue = "No cambios";
-
-        Log.d("EARTHQUAKE", "PrEfErEnces: " + sharedPreferences + "Y el Key: " + key);
-
-        /*if(key.equals(getString(R.string.PREF_UPDATE_INTERNAL))){
-            // Start/Stop auto refresh
-        }else if(key.equals(getString(R.string.PREF_SWITCH))){
-            // Change auto refresh interval
-        }else if(key.equals(getString(R.string.PREF_MAGNITUDE))){
-            // Update earthquake listView
-            double minMag = Double.parseDouble(sharedPreferences.getString(key, "0"));
-        }*/
-    }
 }

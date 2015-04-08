@@ -1,34 +1,48 @@
 package local.dam_2015.sismo;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import local.dam_2015.sismo.Tasks.DownloadEQTasks;
+import local.dam_2015.sismo.fragments.SettingsFragment;
+import local.dam_2015.sismo.managers.AlarmaManager;
 import local.dam_2015.sismo.services.DownloadEQService;
 
 
 public class SismoActivity extends ActionBarActivity implements DownloadEQTasks.addEQInterface{
 
     public static final int PREFS_ACTIVITY = 1 ;
+    private final String EARTHQUAKE_PREFS = "EARTHQUAKE_PREFS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sismo);
-        DownloadEQService service = new DownloadEQService();
-        service.setAlarm();
-        downloadEQs();
+
+        checkToSetAlarm();
     }
 
-    private void downloadEQs() {
+    private void checkToSetAlarm() {
         //DownloadEQTasks task = new DownloadEQTasks(this,this);
         //task.execute(getString(R.string.eq_url));
 
-        Intent download = new Intent(this, DownloadEQService.class);
-        startService(download);
+        //Intent download = new Intent(this, DownloadEQService.class);
+        //startService(download);
+        String KEY = "LAUNCHED_BEFORE";
+
+        SharedPreferences prefs = getSharedPreferences(EARTHQUAKE_PREFS, Activity.MODE_PRIVATE);
+        if(!prefs.getBoolean(KEY, false)){
+            AlarmaManager.setAlarm(this,R.integer.default_interval * 60);      // El valor en mins.
+            prefs.edit().putBoolean(KEY,true).apply();
+        }
     }
 
 

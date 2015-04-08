@@ -9,8 +9,8 @@
             android:defaultValue="true"></SwitchPreference>
         <!-- Frecuancia de refresco -->
         <ListPreference
-            android:defaultValue="0"
-            android:key="@string/PREF_UPDATE_INTERNAL"
+            android:defaultValue="@integer/default_interval"
+            android:key="@string/PREF_UPDATE_INTERVAL"
             android:title="@string/title_refresh"
             android:summary="@string/sum_refresh"
             android:entries="@array/update_freq_entries"

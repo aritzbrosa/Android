@@ -115,12 +115,13 @@ public class DownloadEQService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
 
         Thread t = new Thread(new Runnable(){
             @Override
             public void run() {
                 updateEarthQs(getString(R.string.eq_url));
+                Log.d("EARTHQUAKE", "Procesando Alarma +-+-+-+-+-+- GRSdfgSERgSDFGSDFGsdg·$·$·$·$");
             }
         });
 
@@ -129,19 +130,7 @@ public class DownloadEQService extends Service {
         return Service.START_STICKY;
     }
 
-    public void setAlarm() {
-        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        int alarmType = AlarmManager.ELAPSED_REALTIME_WAKEUP;
-
-        long LengthOfWait = 5000;
-
-        String ALARM_ACTION = "ALARM_ACTION";
-        Intent intentToFire = new Intent(ALARM_ACTION);
-        PendingIntent alarmIntent = PendingIntent.getService(this, 0, intentToFire, 0);
-
-        alarm.setRepeating(alarmType, LengthOfWait, LengthOfWait, alarmIntent);
-    }
 
 
 }
