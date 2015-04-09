@@ -47,7 +47,7 @@ public class DetailActivity extends ActionBarActivity {
         lblmag = (TextView) findViewById(R.id.mag);
         lbldate = (TextView) findViewById(R.id.date);
         lblplace = (TextView) findViewById(R.id.place);
-        btnMap = (Button) findViewById(R.id.map);
+        btnMap = (Button) findViewById(R.id.mapa);
 
         id = detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE);
         eq = db.selectIdQuery(id);
