@@ -99,7 +99,7 @@ public class EarthQuakeDB{
                     cursor.getDouble(indexes.get(KEY_LOCATION_LNG)),
                     cursor.getDouble(indexes.get(KEY_DEPTH))));
             eq.setTime(cursor.getLong(indexes.get(KEY_DATE)));
-            eq.set_id(cursor.getString(indexes.get(KEY_ID)));
+            eq.setURL(cursor.getString(indexes.get(KEY_LINK)));
 
             earthquakes.add(eq);
         }
@@ -159,7 +159,7 @@ public class EarthQuakeDB{
         public Cursor selectAllQuery(double minMag){
 
             String[] result_columns = new String[]{
-                    "_ID", "place", "magnitude", "lat", "long", "depth", "url", "time"
+                    "_ID", "place", "magnitude", "lat", "long", "depth", "link", "time"
             };
 
             String where = "magnitude" + ">=?";

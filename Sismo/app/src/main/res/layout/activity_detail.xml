@@ -131,11 +131,25 @@
             android:textSize="@dimen/abc_text_size_medium_material" />
     </LinearLayout>
 
-    <Button
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="local.dam_2015.sismo.fragments.EqMapFragment"
+        android:id="@+id/fragment2"
+        android:layout_weight="1" />
+
+    <!--<Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MAP"
         android:id="@+id/mapa"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal" />-->
+
+    <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:id="@+id/map_fragment"
+        tools:context="local.dam_2015.sismo.DetailActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />-->
+
 
 </LinearLayout>

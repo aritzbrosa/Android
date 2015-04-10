@@ -1,33 +1,66 @@
 package local.dam_2015.sismo;
 
+
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import local.dam_2015.sismo.Tasks.DownloadEQTasks;
+import local.dam_2015.sismo.fragments.EarthQListFragment;
+import local.dam_2015.sismo.fragments.EqMapFragment;
 import local.dam_2015.sismo.fragments.SettingsFragment;
 import local.dam_2015.sismo.managers.AlarmaManager;
 import local.dam_2015.sismo.services.DownloadEQService;
 
 
-public class SismoActivity extends ActionBarActivity implements DownloadEQTasks.addEQInterface{
+public class SismoActivity extends Activity implements DownloadEQTasks.addEQInterface{
 
     public static final int PREFS_ACTIVITY = 1 ;
+    private static final String LIST_TAB_TITLE = "LIST";
+    private static final String MAP_TAB_TITLE = "MAP";
     private final String EARTHQUAKE_PREFS = "EARTHQUAKE_PREFS";
+    private ActionBar actionBar;
+    private ActionBar.Tab tabList;
+    private ActionBar.Tab tabMap;
+    private String APP_TITLE = "Sismos App";
+    private String APP_SUBTITLE = "Lista de terremoros";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sismo);
-
+        setActionBar();
         checkToSetAlarm();
+    }
+
+    private void setActionBar() {
+        actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setSubtitle(APP_SUBTITLE);
+        actionBar.setTitle(APP_TITLE);
+
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        tabList = actionBar.newTab();
+        tabList.setText(LIST_TAB_TITLE)
+                .setTabListener((ActionBar.TabListener) new TabListener<EarthQListFragment>
+                        (this, R.id.frameContainer, EarthQListFragment.class) {
+                });
+        tabMap = actionBar.newTab();
+        tabMap.setText(MAP_TAB_TITLE)
+                .setTabListener((ActionBar.TabListener)new TabListener<EqMapFragment>
+                        (this, R.id.frameContainer, EqMapFragment.class) {
+                });
+
+        actionBar.addTab(tabList);
+        actionBar.addTab(tabMap);
     }
 
     private void checkToSetAlarm() {

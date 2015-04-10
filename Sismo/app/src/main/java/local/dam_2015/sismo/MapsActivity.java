@@ -81,7 +81,7 @@ public class MapsActivity extends FragmentActivity {
     private void setUpMap() {
         point = new LatLng(eq.getCoordinate().getLgtd(),eq.getCoordinate().getLttd());
         CameraPosition camPos = new CameraPosition.Builder().target(point)
-                .zoom(6)
+                .zoom(3)
                 .tilt(89)
                 .bearing(18)
                 .build();

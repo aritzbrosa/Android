@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.EarthQListFragment;
+import local.dam_2015.sismo.fragments.EqMapFragment;
 import local.dam_2015.sismo.model.EarthQ;
 
 
@@ -28,6 +31,7 @@ public class DetailActivity extends ActionBarActivity {
     private TextView lblplace;
     private Button btnMap;
     private String id;
+    private EqMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class DetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         EarthQuakeDB db = new EarthQuakeDB(this);
+        mapFragment = (EqMapFragment) getFragmentManager().findFragmentById(R.id.fragment2);
 
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
@@ -47,7 +52,7 @@ public class DetailActivity extends ActionBarActivity {
         lblmag = (TextView) findViewById(R.id.mag);
         lbldate = (TextView) findViewById(R.id.date);
         lblplace = (TextView) findViewById(R.id.place);
-        btnMap = (Button) findViewById(R.id.mapa);
+//        btnMap = (Button) findViewById(R.id.mapa);
 
         id = detailIntent.getStringExtra(EarthQListFragment.EARTHQUAKE);
         eq = db.selectIdQuery(id);
@@ -57,9 +62,16 @@ public class DetailActivity extends ActionBarActivity {
         lbllong.setText(String.valueOf(eq.getCoordinate().getDepth()));
         lblmag.setText(String.valueOf(eq.getMagnitude()));
         lbldate.setText(sdt.format(eq.getDate()));
-        lblplace.setText(eq.getPlace());
+        lblplace.setText(eq.getPlace().substring(eq.getPlace().indexOf(",") + 2));
 
-        addEventListener();
+//        addEventListener();
+        showMap(eq);
+    }
+
+    private void showMap(EarthQ eq) {
+        List<EarthQ> list = new ArrayList<EarthQ>();
+        list.add(eq);
+        mapFragment.setEQ(list);
     }
 
     private void addEventListener() {
