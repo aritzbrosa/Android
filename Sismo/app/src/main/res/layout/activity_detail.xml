@@ -132,11 +132,10 @@
     </LinearLayout>
 
     <fragment
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="local.dam_2015.sismo.fragments.EqMapFragment"
-        android:id="@+id/fragment2"
-        android:layout_weight="1" />
+        android:name="local.dam_2015.sismo.fragments.EqDetailMapFragment"
+        android:id="@+id/detail_map_fragment" />
 
     <!--<Button
         android:layout_width="match_parent"

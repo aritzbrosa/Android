@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import local.dam_2015.sismo.Tasks.DownloadEQTasks;
 import local.dam_2015.sismo.fragments.EarthQListFragment;
+import local.dam_2015.sismo.fragments.EqMainMapFragment;
 import local.dam_2015.sismo.fragments.EqMapFragment;
 import local.dam_2015.sismo.fragments.SettingsFragment;
 import local.dam_2015.sismo.managers.AlarmaManager;
@@ -55,8 +56,8 @@ public class SismoActivity extends Activity implements DownloadEQTasks.addEQInte
                 });
         tabMap = actionBar.newTab();
         tabMap.setText(MAP_TAB_TITLE)
-                .setTabListener((ActionBar.TabListener)new TabListener<EqMapFragment>
-                        (this, R.id.frameContainer, EqMapFragment.class) {
+                .setTabListener((ActionBar.TabListener)new TabListener<EqMainMapFragment>
+                        (this, R.id.frameContainer, EqMainMapFragment.class) {
                 });
 
         actionBar.addTab(tabList);

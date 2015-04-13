@@ -1,5 +1,6 @@
 package local.dam_2015.sismo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
@@ -16,11 +17,12 @@ import java.util.List;
 
 import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.EarthQListFragment;
+import local.dam_2015.sismo.fragments.EqDetailMapFragment;
 import local.dam_2015.sismo.fragments.EqMapFragment;
 import local.dam_2015.sismo.model.EarthQ;
 
 
-public class DetailActivity extends ActionBarActivity {
+public class DetailActivity extends Activity {
 
     public static final String MAP = "MAP" ;
     private TextView lblloc;
@@ -31,7 +33,7 @@ public class DetailActivity extends ActionBarActivity {
     private TextView lblplace;
     private Button btnMap;
     private String id;
-    private EqMapFragment mapFragment;
+    private EqDetailMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class DetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         EarthQuakeDB db = new EarthQuakeDB(this);
-        mapFragment = (EqMapFragment) getFragmentManager().findFragmentById(R.id.fragment2);
+        //mapFragment = (EqDetailMapFragment) getFragmentManager().findFragmentById(R.id.detail_map_fragment);
 
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
@@ -65,13 +67,13 @@ public class DetailActivity extends ActionBarActivity {
         lblplace.setText(eq.getPlace().substring(eq.getPlace().indexOf(",") + 2));
 
 //        addEventListener();
-        showMap(eq);
+        //showMap(eq);
     }
 
     private void showMap(EarthQ eq) {
         List<EarthQ> list = new ArrayList<EarthQ>();
         list.add(eq);
-        mapFragment.setEQ(list);
+        //mapFragment.setEQ(list);
     }
 
     private void addEventListener() {
