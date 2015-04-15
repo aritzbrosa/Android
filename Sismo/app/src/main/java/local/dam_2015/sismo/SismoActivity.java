@@ -27,6 +27,7 @@ public class SismoActivity extends Activity implements DownloadEQTasks.addEQInte
     public static final int PREFS_ACTIVITY = 1 ;
     private static final String LIST_TAB_TITLE = "LIST";
     private static final String MAP_TAB_TITLE = "MAP";
+    private static final String SELECTED_TAB = "SELECTED_TAB";
     private final String EARTHQUAKE_PREFS = "EARTHQUAKE_PREFS";
     private ActionBar actionBar;
     private ActionBar.Tab tabList;
@@ -79,6 +80,19 @@ public class SismoActivity extends Activity implements DownloadEQTasks.addEQInte
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(SELECTED_TAB, actionBar.getSelectedNavigationIndex());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        actionBar.setSelectedNavigationItem(savedInstanceState.getInt(SELECTED_TAB));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

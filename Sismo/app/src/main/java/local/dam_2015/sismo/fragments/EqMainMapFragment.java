@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,6 +27,7 @@ import java.util.List;
 import local.dam_2015.sismo.R;
 import local.dam_2015.sismo.abstracts.AbstractMapFragment;
 import local.dam_2015.sismo.model.EarthQ;
+import local.dam_2015.sismo.services.DownloadEQService;
 
 
 public class EqMainMapFragment extends AbstractMapFragment {
@@ -39,6 +43,8 @@ public class EqMainMapFragment extends AbstractMapFragment {
         super.onCreate(savedInstanceState);
 
         getEQData();
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -63,6 +69,7 @@ public class EqMainMapFragment extends AbstractMapFragment {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
         map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        map.clear();
         if(eqs.size()>0){
             for(EarthQ eq: eqs){
                 point = new LatLng(eq.getCoordinate().getLgtd(),eq.getCoordinate().getLttd());
@@ -92,5 +99,25 @@ public class EqMainMapFragment extends AbstractMapFragment {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);*/
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_refresh,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if( id == R.id.action_refresh){
+            Intent download = new Intent(getActivity(), DownloadEQService.class);
+
+            getActivity().startService(download);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

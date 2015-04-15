@@ -56,7 +56,7 @@ public class AdapterMolon extends ArrayAdapter<EarthQ> {
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy/MM/dd");
 
         NumberFormat formatter = new DecimalFormat("#0.0");
-        //setMagColor(item, layout);
+        setMagColor(item, layout);
         mag.setText(String.valueOf(formatter.format(item.getMagnitude())));
         String a = item.getPlace().substring(item.getPlace().indexOf(",") + 2);
         //String a = item.getPlace();
@@ -68,36 +68,37 @@ public class AdapterMolon extends ArrayAdapter<EarthQ> {
 
     private void setMagColor(EarthQ item, LinearLayout layout){
         Color color;
-        int r=47483647,g=125,b=125;
+        int r=47483647,g=Integer.MAX_VALUE,b=Integer.MAX_VALUE;
 
         NumberFormat formatter = new DecimalFormat("#0");
         String num = formatter.format(item.getMagnitude());
         TextView mag = (TextView) layout.findViewById(R.id.magnitude);
 
-        if(num=="1"){
-            r=50;
-        }else if(num=="2"){
-            r=83647;
-        }else if(num=="3"){
-            r=-2147483648;
-        }else if(num=="4"){
-            r=125;
-        }else if(num=="5"){
-            r=150;
-        }else if(num=="6"){
-            r=175;
-        }else if(num=="7"){
-            r=200;
-        }else if(num=="8"){
-            r=225;
-        }else if(num=="9"){
-            r=255;
-        }else if(num=="0"){
-            r=2147483647;
+        if(num.equals("1")){
+            r=0;
+        }else if(num.equals("2")){
+            r=Integer.MAX_VALUE*2/10;
+        }else if(num.equals("3")){
+            r=Integer.MAX_VALUE*3/10;
+        }else if(num.equals("4")){
+            r=Integer.MAX_VALUE*4/10;
+        }else if(num.equals("5")){
+            r=Integer.MAX_VALUE*5/10;
+        }else if(num.equals("6")){
+            r=Integer.MAX_VALUE*6/10;
+        }else if(num.equals("7")){
+            r=Integer.MAX_VALUE*7/10;
+        }else if(num.equals("8")){
+            r=Integer.MAX_VALUE*8/10;
+        }else if(num.equals("9")){
+            r=Integer.MAX_VALUE*9/10;
+        }else if(num.equals("0")){
+            r=Integer.MAX_VALUE;
         }
+
 
         color = new Color();
         //color.getColor
-        mag.setBackgroundColor(r);
+        mag.setBackgroundColor(color.rgb(r,g,b));
     }
 }

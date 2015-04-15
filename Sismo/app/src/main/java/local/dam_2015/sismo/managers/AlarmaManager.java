@@ -18,7 +18,7 @@ public class AlarmaManager {
 
         int alarmType = AlarmManager.RTC;
 
-        long LengthOfWait = interval * 1000;
+        long LengthOfWait = interval * 1000 * 60;
 
         Intent intentToFire = new Intent(context, DownloadEQService.class);
         PendingIntent alarmIntent = PendingIntent.getService(context, 0, intentToFire, 0);

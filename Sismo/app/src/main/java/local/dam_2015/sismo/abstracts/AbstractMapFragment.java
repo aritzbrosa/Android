@@ -60,10 +60,6 @@ public abstract class AbstractMapFragment extends MapFragment implements GoogleM
 
         View layout = super.onCreateView(inflater,container,savedInstanceState);
 
-        map = getMap();
-        map.setOnMapLoadedCallback(this);
-        map.setOnInfoWindowClickListener(this);
-
         return layout;
     }
 
@@ -79,5 +75,23 @@ public abstract class AbstractMapFragment extends MapFragment implements GoogleM
     public void onMapLoaded() {
         getEQData();
         showMap();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        this.getEQData();
+
+        setupIfNeeded();
+
+        map.setOnMapLoadedCallback(this);
+        map.setOnInfoWindowClickListener(this);
+    }
+
+    private void setupIfNeeded() {
+        if(map == null){
+            map=getMap();
+        }
     }
 }

@@ -1,10 +1,13 @@
 package local.dam_2015.sismo.services;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -22,6 +25,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import local.dam_2015.sismo.R;
+import local.dam_2015.sismo.SismoActivity;
 import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.EarthQListFragment;
 import local.dam_2015.sismo.model.Coord;
@@ -69,6 +73,7 @@ public class DownloadEQService extends Service {
                 for (int i = earthquakes.length()-1; i >= 0; i--) {
                     processEarthQuakeTask(earthquakes.getJSONObject(i));
                 }
+                sendNotifications(count);
             }
 
         }catch(MalformedURLException ex){
@@ -130,7 +135,30 @@ public class DownloadEQService extends Service {
         return Service.START_STICKY;
     }
 
+    private void sendNotifications(int count) {
 
+        Intent intentToFire = new Intent(this, SismoActivity.class);
+        PendingIntent activityIntent = PendingIntent.getActivity(this,0,intentToFire,0);
+
+        Notification.Builder builder = new Notification.Builder(DownloadEQService.this);
+
+        builder.setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText(getString(R.string.count_earthquakes, count))
+                .setWhen(System.currentTimeMillis())
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setAutoCancel(true)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setContentIntent(activityIntent);
+
+        Notification notification = builder.getNotification();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        int NOTIFICATION_REF = 1;
+        notificationManager.notify(NOTIFICATION_REF, notification);
+    }
 
 
 }

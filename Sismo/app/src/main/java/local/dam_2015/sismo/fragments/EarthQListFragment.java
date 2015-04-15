@@ -9,6 +9,9 @@ import android.app.ListFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,6 +42,7 @@ import local.dam_2015.sismo.database.EarthQuakeDB;
 import local.dam_2015.sismo.fragments.dummy.DummyContent;
 import local.dam_2015.sismo.model.Coord;
 import local.dam_2015.sismo.model.EarthQ;
+import local.dam_2015.sismo.services.DownloadEQService;
 
 
 public class EarthQListFragment extends ListFragment implements DownloadEQTasks.addEQInterface {
@@ -55,6 +59,8 @@ public class EarthQListFragment extends ListFragment implements DownloadEQTasks.
 
         ListaTerremotos = new ArrayList<>();
         db = new EarthQuakeDB(getActivity());
+
+        setHasOptionsMenu(true);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -99,5 +105,25 @@ public class EarthQListFragment extends ListFragment implements DownloadEQTasks.
         detailIntent.putExtra(EARTHQUAKE, eq.get_id());
 
         startActivity(detailIntent);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.menu_refresh,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if( id == R.id.action_refresh){
+            Intent download = new Intent(getActivity(), DownloadEQService.class);
+
+            getActivity().startService(download);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
